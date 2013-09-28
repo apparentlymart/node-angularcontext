@@ -1,0 +1,27 @@
+{
+    "name": "angularcontext",
+    "version": "0.0.1",
+    "description": "Use AngularJS in Node applications",
+    "author": "Martin Atkins <mart@degeneration.co.uk>",
+    "keywords": ["angularjs"],
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/apparentlymart/node-angularcontext.git"
+    },
+    "main": "./lib/main",
+    "scripts": {
+        "test": "nodeunit tests/"
+    },
+    "licenses": [
+        {
+            "type": "MIT",
+            "url": "http://github.com/apparentlymart/node-angularcontext/blob/master/LICENSE"
+        }
+    ],
+    "dependencies": {
+        "contextify": ">=0.1.6"
+    },
+    "devDependencies": {
+        "nodeunit": "*"
+    }
+}
