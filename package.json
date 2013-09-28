@@ -10,7 +10,8 @@
     },
     "main": "./lib/main",
     "scripts": {
-        "test": "nodeunit tests/"
+        "test": "nodeunit tests/",
+        "lint": "jshint -c .jshintrc lib/* tests/*"
     },
     "licenses": [
         {
@@ -22,6 +23,7 @@
         "contextify": ">=0.1.6"
     },
     "devDependencies": {
-        "nodeunit": "*"
+        "nodeunit": "*",
+        "jshint": "2.1.11"
     }
 }
