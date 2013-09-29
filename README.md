@@ -106,6 +106,10 @@ are somewhat like having a sequence of `script` elements in an HTML document, in
 all run in the same global scope. The `angular` global object is available here, along with
 a somewhat-browser-like DOM API.
 
+As a convenience there is also a `runFiles` method (note the plural) that takes an array of
+filenames and executes them in the order they are provided. Commonly a caller will load the
+AngularJS core plus some AngularJS modules and then some application code.
+
 A more powerful method is to directly register a module from the normal NodeJS context. This allows
 you to provide a module that makes use of NodeJS functionality and libraries such as `jsdom`.
 This can be done by calling the `module` method, which works just like the equivalent method
