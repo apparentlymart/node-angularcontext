@@ -20,7 +20,7 @@
         }
     ],
     "dependencies": {
-        "contextify": ">=0.1.6"
+        "jsdom": "~0.8.6"
     },
     "devDependencies": {
         "nodeunit": "*",

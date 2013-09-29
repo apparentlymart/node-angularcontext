@@ -15,23 +15,17 @@ Some possible applications of this capability include:
 - Inspect an application's routes and run its `resolve` functions on the server so that the results can be delivered to the client in a single round-trip.
 - With the help of something like `jsdom`, render static versions of pages to return to robot clients like search engine crawlers that don't run JavaScript code.
 
-However, this module just provides the core capability of bridging to AngularJS. Using this module
-alone allows use of basic AngularJS functionality like scopes and the expression parser, but
-further work is required of the module user to override features of AngularJS that require a
-DOM or a browser including, but not limited to, `$route` and the `$routeProvider`, the template
-parser, and `$httpBackend`.
+This module provides the bridge to AngularJS and enough DOM to allow the AngularJS injector and
+compiler to work. For most applications further work will be required to override the built-in
+implementations of various services in order to integrate them with the NodeJS application and
+in order to prevent behaviors that make sense in the browser but don't make sense in Node.
 
 ## Hurdles
 
 Unfortunately there are a couple of hurdles to jump before this module can be used.
 
-The first hurdle, that applies to all users, is that the stock builds of AngularJS currently
-expect a browser context in order to even load. There is
-[a patched version](https://raw.github.com/apparentlymart/node-angularcontext/angular-nobrowser/angular-nobrowser-v1.2.0.js)
-that you can use if you're happy to run in AngularJS 1.2.0. Otherwise,
-you can try applying
-[the small patch](https://github.com/apparentlymart/angular.js/commit/f27ed0df073fbde236ad5a5b853be37395f5f252)
-to other versions of AngularJS and the building the nobrowser version manually yourself.
+The first hurdle, that applies to all users, is getting hold of a copy of AngularJS. The stock
+build from the website should work fine. The author tested this module primarily with version 1.2.0.
 
 The second hurdle is that this module uses the node module `contextify` to
 provide a separated context in which to instantiate AngularJS. This module contains some native
@@ -48,8 +42,8 @@ Installation is straightforward aside from the `contextify` hurdle mentioned abo
 npm install angularcontext
 ```
 
-This module doesn't include AngularJS so you'll have to obtain a copy of it elsewhere, noting
-the caveat listed above under "Hurdles".
+This module doesn't include AngularJS, so you'll have to obtain a copy of it elsewhere and
+bundle it with your calling application.
 
 ## Usage
 
@@ -69,12 +63,12 @@ var context = angularcontext.Context();
 ```
 
 Before the context will do anything useful it needs to at least have some version of AngularJS
-loaded into it. The `runFile` function provides a way to achieve this given a suitably-patched
-version of Angular available in a file somewhere:
+loaded into it. The `runFile` function provides a way to achieve this given a version of Angular
+available in a file somewhere:
 
 ```js
 context.runFile(
-    'angular-nobrowser.js',
+    'angular.js',
     function (result, error) {
         if (error) {
             console.error(error);
@@ -105,12 +99,12 @@ $injector.invoke(
 
 However, to do most useful things it's necessary to register further modules that either provide
 application-specific functionality or override certain built-in AngularJS services whose normal
-implementations can't function in the non-browser environment.
+implementations are inappropriate in the non-browser environment.
 
 One way to do that is to load additional scripts using `runFile`. Repeated calls to this method
 are somewhat like having a sequence of `script` elements in an HTML document, in that they will
-all run in the same global scope. The `angular` global object is available here, but of course
-the usual browser doodads like `window`, `document`, etc are not.
+all run in the same global scope. The `angular` global object is available here, along with
+a somewhat-browser-like DOM API.
 
 A more powerful method is to directly register a module from the normal NodeJS context. This allows
 you to provide a module that makes use of NodeJS functionality and libraries such as `jsdom`.
@@ -119,7 +113,7 @@ on the global `angular` object when running in a browser.
 
 ```js
 var fs = require('fs');
-var module = context.module('nodeFilesystem');
+var module = context.module('nodeFilesystem', []);
 module.factory(
     'nodeFilesystem',
     function () {
