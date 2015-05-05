@@ -20,7 +20,7 @@
         }
     ],
     "dependencies": {
-        "jsdom": "~0.8.6"
+        "jsdom": "~3.1.2"
     },
     "devDependencies": {
         "nodeunit": "*",
