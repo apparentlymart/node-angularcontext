@@ -25,5 +25,8 @@
     "devDependencies": {
         "nodeunit": "*",
         "jshint": "2.1.11"
+    },
+    "optionalDependencies": {
+        "angular": "*"
     }
 }
