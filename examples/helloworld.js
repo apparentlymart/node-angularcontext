@@ -6,7 +6,7 @@ var angularcontext = require('../lib/main.js');
 
 var context = angularcontext.Context();
 context.runFile(
-    'angular.js',
+    __dirname + '/../node_modules/angular/angular.js',
     function () {
 
         var injector = context.injector(['ng']);
