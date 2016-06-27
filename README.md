@@ -27,16 +27,9 @@ Unfortunately there are a couple of hurdles to jump before this module can be us
 The first hurdle, that applies to all users, is getting hold of a copy of AngularJS. The stock
 build from the website should work fine. The author tested this module primarily with version 1.2.0.
 
-The second hurdle is that this module uses the node module `contextify` to
-provide a separated context in which to instantiate AngularJS. This module contains some native
-code and so it can only be installed on systems that have a compiler available. Mac OS users will
-therefore need XCode installed, Linux users will need `gcc` available, while Windows users might
-want to check out
-[the Windows Installation Guide for `contextify`](https://github.com/brianmcd/contextify/wiki/Windows-Installation-Guide).
-
 ## Installation
 
-Installation is straightforward aside from the `contextify` hurdle mentioned above. Try:
+Try:
 
 ```
 npm install angularcontext
