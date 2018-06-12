@@ -3,7 +3,9 @@
     "version": "0.0.23",
     "description": "Use AngularJS in Node applications",
     "author": "Martin Atkins <mart@degeneration.co.uk>",
-    "keywords": ["angularjs"],
+    "keywords": [
+        "angularjs"
+    ],
     "repository": {
         "type": "git",
         "url": "git://github.com/apparentlymart/node-angularcontext.git"
@@ -20,7 +22,7 @@
         }
     ],
     "dependencies": {
-        "jsdom": "~9.5.0"
+        "jsdom": "~11.11.0"
     },
     "devDependencies": {
         "nodeunit": "*",
